@@ -119,11 +119,11 @@ export const login = async (req, res) => {
 
         if (!user) {
             return res.status(400).json({
-                msg: 'Incorrect credentials, email does not exist in database '
+                msg: 'Incorrect credentials, username does not exist in database '
             });
         }
 
-        if (!user.estado) {
+        if (!user.status) {
             return res.status(400).json({
                 msg: 'User does not exist in databse'
             });
@@ -143,7 +143,6 @@ export const login = async (req, res) => {
             userDetails: {
                 username: user.username,
                 token: token,
-                profilePicture: user.profilePicture
             }
         });
 
