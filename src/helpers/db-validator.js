@@ -1,5 +1,7 @@
 import User from '../users/user.model.js';
 import Role from '../role/role.model.js';
+import Course from '../courses/course.model.js'
+import { Types } from "mongoose";
 
 export const esRoleValido = async (role = ' ') => {
     const existeRol = await Role.findOne({ role });
@@ -25,3 +27,17 @@ export const existeUsuarioById = async (id = '') => {
         
     }
 }
+
+export const existeCourseByName = async (courseName = "") => {
+    const existingCourse = await Course.findOne({ courseName });
+
+    if (existingCourse) {
+        throw new Error(`The course '${courseName}' already exists in the database`);
+    }
+};
+
+export const esObjectIdValido = async (id) => {
+    if (!Types.ObjectId.isValid(id)) {
+        throw new Error(`The ID ${id} is not a valid ObjectId`);
+    }
+};
