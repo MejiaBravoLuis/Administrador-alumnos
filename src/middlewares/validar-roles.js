@@ -6,15 +6,6 @@ export const tieneRole = (...roles) => {
                 msg: 'Se quiere verificar un role sin validar el token primero'
             })
         }
-
-        
-        if(!roles.includes(req.usuario.role)){
-            return res.status(401).json({
-                succes: false,
-                msg: `Usuario no autorizado, posee un rol ${req.usuario.role}, los roles autorizados son ${roles}`
-            })
-        }
-
         next();
     }
 
