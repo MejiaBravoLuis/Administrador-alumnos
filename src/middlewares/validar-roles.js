@@ -1,12 +1,19 @@
 export const tieneRole = (...roles) => {
     return (req, res, next) => {
-        if(!req.usuario){
+        if (!req.user) {
             return res.status(500).json({
-                succes: false,
-                msg: 'Se quiere verificar un role sin validar el token primero'
-            })
+                success: false,
+                msg: "Please check again your token"
+            });
         }
-        next();
-    }
 
-}
+        if (!roles.includes(req.user.role)) {
+            return res.status(403).json({
+                success: false,
+                msg: `Sorry, only teachers can update courses: ${roles.join(", ")}`
+            });
+        }
+
+        next();
+    };
+};

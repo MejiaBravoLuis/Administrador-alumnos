@@ -36,6 +36,13 @@ export const existeCourseByName = async (courseName = "") => {
     }
 };
 
+export const existeCourseById = async (id) => {
+    const course = await Course.findById(id);
+    if (!course) {
+        throw new Error(`The course with ID '${id}' does not exist`);
+    }
+};
+
 export const esObjectIdValido = async (id) => {
     if (!Types.ObjectId.isValid(id)) {
         throw new Error(`The ID ${id} is not a valid ObjectId`);
