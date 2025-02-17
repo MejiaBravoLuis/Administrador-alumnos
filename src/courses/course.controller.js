@@ -71,60 +71,33 @@ export const getCourses = async (req = request, res = response) => {
 
 export const updateCourse = async (req, res) => {
     try {
+        console.log('si llegó el id bro', req.params.id)
+        console.log('si llegaron los datos', req.body)
         const { id } = req.params;
-        const { courseName, description, assignedStudents, teacher } = req.body;
+        const teacherId = req.user._id; 
 
-        // Verificar si el curso existe
-        const existingCourse = await Course.findById(id);
-        if (!existingCourse) {
-            return res.status(404).json({
+        const curso = await Course.findOne({ _id: id, teacher: teacherId });
+
+        if (!curso) {
+            return res.status(403).json({
                 success: false,
-                msg: `Course with ID '${id}' not found`
+                msg: "No puedes editar este curso",
             });
         }
 
-        // Validar que el profesor existe y tiene rol TEACHER_ROLE
-        if (teacher) {
-            const teacherData = await User.findById(teacher);
-            if (!teacherData || teacherData.role !== "TEACHER_ROLE") {
-                return res.status(400).json({
-                    success: false,
-                    msg: "Invalid teacher ID or user is not a teacher"
-                });
-            }
-        }
 
-        // Validar los estudiantes asignados
-        if (assignedStudents) {
-            for (let studentId of assignedStudents) {
-                const studentExists = await User.findById(studentId);
-                if (!studentExists) {
-                    return res.status(400).json({
-                        success: false,
-                        msg: `Student ID '${studentId}' is invalid or does not exist`
-                    });
-                }
-            }
-        }
-
-        // Actualizar curso
-        const updatedCourse = await Course.findByIdAndUpdate(
-            id,
-            { courseName, description, assignedStudents, teacher },
-            { new: true, runValidators: true }
-        ).populate("teacher").populate("assignedStudents");  // 🔥 Poblar datos
+        const cursoActualizado = await Course.findByIdAndUpdate(id, req.body, { new: true });
 
         res.json({
             success: true,
-            msg: "Course updated successfully!",
-            course: updatedCourse
+            msg: "Curso actualizado exitosamente",
+            curso: cursoActualizado,
         });
-
     } catch (error) {
+        console.error(error);
         res.status(500).json({
             success: false,
-            msg: "Something went wrong while updating the course",
-            error: error.message
+            msg: "Error al actualizar el curso",
         });
     }
 };
@@ -157,47 +130,77 @@ export const deleteCourse = async (req, res) => {
     }
 };
 
-
-
-export const assignStudents = async (req = request, res = response) => {
+export const signAlumnos = async (req, res) => {
     try {
-        const { id } = req.params;
-        const { students } = req.body; // [array de IDs de estudiantes]
+        console.log('hola')
+        const { assignedCourses } = req.body;
+        const authenticatedUser = req.usuario; 
 
-        // Verificar si el curso existe
-        const course = await Course.findById(id);
-        if (!course) {
-            return res.status(404).json({
+        if (authenticatedUser.role !== "STUDENT_ROLE") {
+            return res.status(403).json({
                 success: false,
-                msg: "Course not found"
+                message: "Esta función solo es para estudiantes"
             });
         }
 
-        // Verificar si los estudiantes existen
-        const studentsExist = await User.find({ '_id': { $in: students }, role: "STUDENT_ROLE" });
-        if (studentsExist.length !== students.length) {
+        if (!Array.isArray(assignedCourses) || assignedCourses.length === 0) {
             return res.status(400).json({
                 success: false,
-                msg: "One or more students do not exist or are not valid students"
+                message: "Debes proporcionar un arreglo de IDs de cursos"
             });
         }
 
-        // Asignar estudiantes al curso
-        course.assignedStudents.push(...students);
-        await course.save();
+        const user = await User.findById(authenticatedUser._id);
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "Usuario no encontrado"
+            });
+        }
 
-        res.status(200).json({
+        const totalCursos = user.assignedCourses.length + assignedCourses.length;
+        if (totalCursos > 3) {
+            return res.status(400).json({
+                success: false,
+                message: "Un estudiante solo puede estar inscrito en un máximo de 3 cursos",
+            });
+        }
+
+
+        const updatedCourses = await Promise.all(
+            assignedCourses.map(async (courseId) => { 
+                const curso = await Course.findById(courseId);
+
+                if (!curso) return null;
+
+                if (!curso.students.includes(authenticatedUser._id)) {
+                    return Course.findByIdAndUpdate(
+                        courseId,
+                        { students: [...curso.students, authenticatedUser._id] },
+                        { new: true }
+                    );
+                }
+
+                return curso;
+            })
+        );
+
+        await User.findByIdAndUpdate(authenticatedUser._id, {
+            assignedCourses: [...user.assignedCourses, ...assignedCourses]
+        });
+
+        return res.status(200).json({
             success: true,
-            msg: "Students assigned to course successfully",
-            course
+            msg: "Te has inscrito en los cursos seleccionados",
+            courses: updatedCourses.filter(course => course !== null) 
         });
 
     } catch (error) {
         console.error(error);
-        res.status(500).json({
+        return res.status(500).json({
             success: false,
-            msg: "Error assigning students to the course",
-            error: error.message
+            message: "Error al inscribirte en los cursos",
+            error
         });
     }
 };

@@ -93,7 +93,8 @@ export const registerTeacher = async (req, res) => {
         return res.status(201).json({
             message: "Teacher registered succesfully!!!",
             userDetails: {
-                user: user.email
+                email: user.email,
+                username: user.username
             }
         });
 

@@ -1,12 +1,13 @@
-import e, { Router } from "express";
-import { check } from "express-validator";
-import { getCourses, updateCourse, addCourse, deleteCourse } from "../courses/course.controller.js";
+import { Router } from "express";
+import { check, body } from "express-validator";
+import { getCourses, updateCourse, addCourse, deleteCourse, signAlumnos } from "../courses/course.controller.js";
 import { validarCampos } from "../middlewares/validar-campos.js";
 import { esObjectIdValido } from "../helpers/db-validator.js";
 import { existeCourseByName, existeCourseById } from "../helpers/db-validator.js";
 import { existeUsuarioById } from "../helpers/db-validator.js";
 import { tieneRole } from "../middlewares/validar-roles.js";
 import { validarJWT } from "../middlewares/validar-jwt.js";
+import {duplicatedCourse, alreadySignedInCourse} from "../middlewares/validator.js"
 
 const router = Router();
 
@@ -15,24 +16,8 @@ router.get("/", getCourses)
 router.post(
     "/",
     [
-        check("courseName", "Course name is required").not().isEmpty(),
-        check("courseName").custom(existeCourseByName),
-        check("description", "Description is required").not().isEmpty(),
-        check("assignedStudents")
-            .optional()
-            .isArray()
-            .custom(async (students) => {
-                for (let id of students) {
-                    await esObjectIdValido(id);
-                    await existeUsuarioById(id);
-                }
-                return true;
-            }),
-        check("teacher")
-            .custom(async (id) => {
-                await esObjectIdValido(id);
-                await existeUsuarioById(id);
-            }),
+        validarJWT, 
+        tieneRole("TEACHER_ROLE"),
         validarCampos
     ],
     addCourse
@@ -41,47 +26,9 @@ router.post(
 router.put(
     "/:id",
     [
-        validarJWT,  
-        tieneRole("TEACHER_ROLE"),  
-        check("id", "Invalid course ID").custom(async (id) => {
-            await esObjectIdValido(id);
-            const courseExists = await Course.findById(id);
-            if (!courseExists) {
-                throw new Error(`Course with ID '${id}' does not exist`);
-            }
-        }),
-        check("courseName")
-            .optional()
-            .custom(async (courseName, { req }) => {
-                const existingCourse = await Course.findOne({ courseName });
-                if (existingCourse && existingCourse._id.toString() !== req.params.id) {
-                    throw new Error(`The course name '${courseName}' is already in use`);
-                }
-            }),
-        check("description")
-            .optional()
-            .notEmpty()
-            .withMessage("Description cannot be empty"),
-        check("assignedStudents")
-            .optional()
-            .isArray()
-            .withMessage("Assigned students must be an array")
-            .custom(async (students) => {
-                for (let id of students) {
-                    await esObjectIdValido(id);
-                    await existeUsuarioById(id);
-                }
-                return true;
-            }),
-        check("teacher")
-            .optional()
-            .custom(async (id) => {
-                await esObjectIdValido(id);
-                const teacher = await User.findById(id);
-                if (!teacher || teacher.role !== "TEACHER_ROLE") {
-                    throw new Error("Teacher ID is invalid or the user is not a teacher");
-                }
-            }),
+        validarJWT, 
+        tieneRole("TEACHER_ROLE"),
+        check("id").custom(existeCourseById),
         validarCampos
     ],
     updateCourse
@@ -98,6 +45,25 @@ router.delete(
     deleteCourse
 );
 
+router.put(
+    "/inscribirse",
+    [
+        validarJWT, 
+        tieneRole("STUDENT_ROLE"),
+        body("assignedCourses") // Corregido el nombre
+            .isArray().withMessage("Los cursos deben estar en un array")
+            .custom((courses) => {
+                if (courses.length > 3) {
+                    throw new Error("Un estudiante solo puede registrarse en un máximo de 3 cursos");
+                }
+                return true;
+            })
+            .custom(alreadySignedInCourse),
+        check("assignedCourses.*").custom(duplicatedCourse), // Corregido el nombre
 
+        validarCampos
+    ],
+    signAlumnos
+);
 
 export default router;
