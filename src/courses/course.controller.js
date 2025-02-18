@@ -105,102 +105,113 @@ export const updateCourse = async (req, res) => {
 export const deleteCourse = async (req, res) => {
     try {
         const { id } = req.params;
-        
-        const course = await Course.findByIdAndUpdate(id, { status: false }, { new: true });
+        const teacherId = req.user._id;
+
+        console.log("Course ID:", id);
+        console.log("Authenticated Teacher ID:", teacherId);
+
+        const course = await Course.findOne({ _id: id, teacher: teacherId });
 
         if (!course) {
-            return res.status(404).json({
+            return res.status(403).json({
                 success: false,
-                message: "Course not found"
+                msg: "Couldn't delete this course"
             });
         }
+
+        const students = await User.find({ asignedCourses: id });
+
+        for( const student of students){
+            let newAsignedCourses = [];
+            for (let i = 0; i < student.asignedCourses.length; i++) {
+                if (student.asignedCourses[i].toString() !== id) {
+                    newAsignedCourses[newAsignedCourses.length] = student.asignedCourses[i]
+                }                
+            }
+
+            await User.updateOne(
+                { _id: student._id },
+                { asignedCourses: newAsignedCourses },
+                { runValidators: false }
+            )
+        }
+
+        course.students = [];
+        course.status = false;
+        await course.save();
 
         res.status(200).json({
             success: true,
-            message: "Course deactivated succesfully!!",
-            course
-        });
+            message: "The course has been deactivated succesfully and the students are unsigned",
+            course: course
+        })
     } catch (error) {
-        console.error("Something went wrong trying to delete the course:", error); 
         res.status(500).json({
             success: false,
-            message: "Something went wrong trying to delete the course",
-            error: error.message 
-        });
+            message: "Ups, something went wrong trying to deactive the course",
+            error: error.message
+        })
     }
-};
+}
 
-export const signAlumnos = async (req, res) => {
+export const signStudents = async (req, res) => {
     try {
-        console.log('hola')
-        const { assignedCourses } = req.body;
-        const authenticatedUser = req.usuario; 
+        
+        const { asignedCourses } = req.body;
+        const authenticatedUser = req.user;
 
         if (authenticatedUser.role !== "STUDENT_ROLE") {
-            return res.status(403).json({
+            return res.status(404).json({
                 success: false,
-                message: "Esta función solo es para estudiantes"
+                message: "Only students can sign in courses"
             });
         }
 
-        if (!Array.isArray(assignedCourses) || assignedCourses.length === 0) {
+        if (!Array.isArray(asignedCourses) || asignedCourses.length === 0) {
             return res.status(400).json({
-                success: false,
-                message: "Debes proporcionar un arreglo de IDs de cursos"
+                succes: false,
+                message: "Course's ID must be in array"
             });
         }
 
         const user = await User.findById(authenticatedUser._id);
         if (!user) {
-            return res.status(404).json({
-                success: false,
-                message: "Usuario no encontrado"
-            });
-        }
-
-        const totalCursos = user.assignedCourses.length + assignedCourses.length;
-        if (totalCursos > 3) {
             return res.status(400).json({
                 success: false,
-                message: "Un estudiante solo puede estar inscrito en un máximo de 3 cursos",
+                message: "The student can be signed in 3 courses max"
             });
         }
 
-
         const updatedCourses = await Promise.all(
-            assignedCourses.map(async (courseId) => { 
-                const curso = await Course.findById(courseId);
+            asignedCourses.map(async (courseId) => {
+                const course = await Course.findById(courseId);
 
-                if (!curso) return null;
-
-                if (!curso.students.includes(authenticatedUser._id)) {
+                if (!course.students.includes(authenticatedUser._id)) {
                     return Course.findByIdAndUpdate(
                         courseId,
-                        { students: [...curso.students, authenticatedUser._id] },
+                        { students: [...course.students, authenticatedUser._id] },
                         { new: true }
                     );
                 }
-
-                return curso;
+                return course;
             })
         );
 
         await User.findByIdAndUpdate(authenticatedUser._id, {
-            assignedCourses: [...user.assignedCourses, ...assignedCourses]
+            asignedCourses: [ ...user.asignedCourses, ...asignedCourses ]
         });
 
         return res.status(200).json({
             success: true,
-            msg: "Te has inscrito en los cursos seleccionados",
-            courses: updatedCourses.filter(course => course !== null) 
+            msg: "You've signed in the selected courses",
+            courses: updatedCourses.filter(course => course !== null)
         });
 
     } catch (error) {
-        console.error(error);
         return res.status(500).json({
-            success: false,
-            message: "Error al inscribirte en los cursos",
+            success: true,
+            message: "Ups, something went wrong trying to sign in the courses",
             error
-        });
+        })
     }
-};
+}

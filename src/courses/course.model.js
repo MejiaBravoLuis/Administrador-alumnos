@@ -15,18 +15,19 @@ const CourseSchema = new Schema({
         type: Boolean, 
         default: true
     },
-    assignedStudents: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: "User"
-        }
-    ],
     teacher: {
         type: Schema.Types.ObjectId,
         ref: "User",
         required: [true, "Teacher is required"]
-    }
-}, {
+    },
+    students: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+        }
+    ]
+}, 
+{
     timestamps: true,
     versionKey: false
 });

@@ -32,7 +32,7 @@ export const loginValidator = [
     validarCampos
 ];
 
-export const alreadySignedInCourse = async (courseId, { req }) => {
+export const alreadySigned = async (courseId, { req }) => {
     try {
         const userId = req.user._id;
 
@@ -42,7 +42,7 @@ export const alreadySignedInCourse = async (courseId, { req }) => {
             throw new Error("User not found");
         }
 
-        if (user.enrolledCourses.includes(courseId)) {
+        if (user.asignedCourses.includes(courseId)) {
             throw new Error("You are signed in this course already");
         }
 
