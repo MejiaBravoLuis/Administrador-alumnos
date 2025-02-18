@@ -1,0 +1,144 @@
+[{
+  "_id": {
+    "$oid": "67aeae3b98acbc438ee579a6"
+  },
+  "courseName": "Physics",
+  "description": "Physics class",
+  "students": [
+    {
+      "$oid": "67b3db2b34b20a001d59a4fd"
+    },
+    {
+      "$oid": "67b3db2d34b20a001d59a4ff"
+    },
+    {
+      "$oid": "67b3dbc775e58c5b3119db25"
+    }
+  ],
+  "updatedAt": {
+    "$date": "2025-02-18T01:02:03.567Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67b16f9c4938756457230a98"
+  },
+  "courseName": "Algebra",
+  "description": "Algebra class",
+  "status": true,
+  "assignedStudents": [
+    {
+      "$oid": "67aeae6c2c86de251005faed"
+    }
+  ],
+  "teacher": {
+    "$oid": "67afe11a1bc3dde7fc77a017"
+  },
+  "createdAt": {
+    "$date": "2025-02-16T04:54:52.616Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-18T01:02:24.172Z"
+  },
+  "students": [
+    {
+      "$oid": "67aeae6c2c86de251005faed"
+    },
+    {
+      "$oid": "67aeb0098baecd45d30c7824"
+    },
+    {
+      "$oid": "67b3dbc775e58c5b3119db25"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67b288a71c882d4694a0df8b"
+  },
+  "courseName": "Tecnología",
+  "description": "tecnología class",
+  "status": false,
+  "assignedStudents": [
+    {
+      "$oid": "67aeae6c2c86de251005faed"
+    }
+  ],
+  "teacher": {
+    "$oid": "67afe11a1bc3dde7fc77a017"
+  },
+  "createdAt": {
+    "$date": "2025-02-17T00:53:59.490Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-17T01:16:43.493Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67b288d11c882d4694a0df95"
+  },
+  "courseName": "TICS",
+  "description": "TICS class",
+  "status": false,
+  "assignedStudents": [
+    {
+      "$oid": "67aeae6c2c86de251005faed"
+    }
+  ],
+  "teacher": {
+    "$oid": "67afe11a1bc3dde7fc77a017"
+  },
+  "createdAt": {
+    "$date": "2025-02-17T00:54:41.019Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-18T01:02:10.487Z"
+  },
+  "students": [
+    {
+      "$oid": "67b3dbc775e58c5b3119db25"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67b289051c882d4694a0dfa1"
+  },
+  "courseName": "Seminario",
+  "description": "seminario class",
+  "status": false,
+  "assignedStudents": [],
+  "teacher": {
+    "$oid": "67afe11a1bc3dde7fc77a017"
+  },
+  "createdAt": {
+    "$date": "2025-02-17T00:55:33.307Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-18T01:02:32.013Z"
+  },
+  "students": [
+    {
+      "$oid": "67b3dbc775e58c5b3119db25"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67b3dba075e58c5b3119db22"
+  },
+  "courseName": "Practica Supervisada",
+  "description": "practica class",
+  "status": true,
+  "teacher": {
+    "$oid": "67b3db7275e58c5b3119db1c"
+  },
+  "students": [],
+  "createdAt": {
+    "$date": "2025-02-18T01:00:16.511Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-18T01:00:16.511Z"
+  }
+}]

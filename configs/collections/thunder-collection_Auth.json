@@ -1,0 +1,147 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "Auth",
+    "collectionId": "fb7f6aa7-1a1f-4341-9159-ba44876f229f",
+    "dateExported": "2025-02-18T01:27:07.904Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "7c58db15-d7ae-4138-bbab-3daac1f2b080",
+            "colId": "fb7f6aa7-1a1f-4341-9159-ba44876f229f",
+            "containerId": "",
+            "name": "registerStudent",
+            "url": "http://localhost:3000/educationalSystem/v1/auth/register/student",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2025-02-14T02:26:32.938Z",
+            "modified": "2025-02-18T01:00:55.694Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"bingus cat \",\n  \"email\": \"bingus@kinal.edu.gt\",\n  \"username\": \"bingus\",\n  \"password\": \"12345678\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "37f5b68e-7d27-4ced-9f8a-722b036192f5",
+            "colId": "fb7f6aa7-1a1f-4341-9159-ba44876f229f",
+            "containerId": "",
+            "name": "loginStudent",
+            "url": "http://localhost:3000/educationalSystem/v1/auth/login",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2025-02-14T02:47:24.072Z",
+            "modified": "2025-02-18T01:23:31.879Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"username\": \"chino\",\n  \"password\": \"12345678\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "e00c5349-965e-4c5d-8fd1-9b4859f9f345",
+            "colId": "fb7f6aa7-1a1f-4341-9159-ba44876f229f",
+            "containerId": "",
+            "name": "registerTeacher",
+            "url": "http://localhost:3000/educationalSystem/v1/auth/register/teacher",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2025-02-14T23:11:11.495Z",
+            "modified": "2025-02-18T00:59:30.348Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Elmer Santos\",\n  \"email\": \"esantos@kinal.edu.gt\",\n  \"username\": \"goat\",\n  \"password\": \"12345678\",\n  \"role\": \"TEACHER_ROLE\"\n}\n",
+                "form": []
+            }
+        },
+        {
+            "_id": "88f938c3-e471-4cc6-95e3-ad17f8e2d8a7",
+            "colId": "fb7f6aa7-1a1f-4341-9159-ba44876f229f",
+            "containerId": "",
+            "name": "loginTeacher",
+            "url": "http://localhost:3000/educationalSystem/v1/auth/login",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2025-02-14T23:11:15.791Z",
+            "modified": "2025-02-18T00:59:38.196Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"username\": \"goat\",\n  \"password\": \"12345678\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "bd5185a0-bfea-44a5-93af-1c0eaaa16df3",
+            "colId": "fb7f6aa7-1a1f-4341-9159-ba44876f229f",
+            "containerId": "",
+            "name": "getUsers",
+            "url": "http://localhost:3000/educationalSystem/v1/users/",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2025-02-16T01:40:20.567Z",
+            "modified": "2025-02-18T00:47:27.317Z",
+            "headers": []
+        },
+        {
+            "_id": "c740c925-a320-4156-8c92-a6358e183598",
+            "colId": "fb7f6aa7-1a1f-4341-9159-ba44876f229f",
+            "containerId": "",
+            "name": "editUser",
+            "url": "http://localhost:3000/educationalSystem/v1/users/67afec191bc3dde7fc77a025",
+            "method": "PUT",
+            "sortNum": 70000,
+            "created": "2025-02-16T02:31:27.705Z",
+            "modified": "2025-02-16T02:32:50.983Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Aron\",\n  \"email\": \"aron@kinal.edu.gt\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "1ec8a5f7-d2ad-40da-a6ee-21a7bacfc199",
+            "colId": "fb7f6aa7-1a1f-4341-9159-ba44876f229f",
+            "containerId": "",
+            "name": "updatePassword",
+            "url": "http://localhost:3000/educationalSystem/v1/users/67b3db7275e58c5b3119db1c/password",
+            "method": "PUT",
+            "sortNum": 80000,
+            "created": "2025-02-16T02:38:53.000Z",
+            "modified": "2025-02-18T01:22:03.548Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2IzZGI3Mjc1ZTU4YzViMzExOWRiMWMiLCJpYXQiOjE3Mzk4NDE2NDQsImV4cCI6MTczOTg0NTI0NH0.MYTt8URxQ1wC7xC4IOwrlLZPy5Q-wivlH1661p_cUSg"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"password\": \"12345678\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "62e90ce9-879d-445d-83e0-488e406877f7",
+            "colId": "fb7f6aa7-1a1f-4341-9159-ba44876f229f",
+            "containerId": "",
+            "name": "deletUser",
+            "url": "http://localhost:3000/educationalSystem/v1/users/67b13dcb3562c4faebc189b7",
+            "method": "DELETE",
+            "sortNum": 90000,
+            "created": "2025-02-16T02:52:40.308Z",
+            "modified": "2025-02-17T23:00:16.863Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2FlYWU2YzJjODZkZTI1MTAwNWZhZWQiLCJpYXQiOjE3Mzk4MzMxMzIsImV4cCI6MTczOTgzNjczMn0.tTGVZ1In8zWvaSJw2O2LHpkwpf2-6owT3NPYpsHqeuk"
+                }
+            ]
+        }
+    ],
+    "ref": "HtsqsTL2tyejEObREby9fYs7x0b75gOUex7KRzWpVBCsvXYvbzgwA9WF-4eMW9ta4uma8wrU_APdTcPk-au_nQ"
+}

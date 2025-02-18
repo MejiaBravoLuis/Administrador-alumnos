@@ -1,0 +1,106 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "Courses",
+    "collectionId": "e17d8b0f-2f6f-449e-81c7-e1cbb0672667",
+    "dateExported": "2025-02-18T01:28:32.245Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "7afd85f0-8767-434b-8fd9-b290b4655bf0",
+            "colId": "e17d8b0f-2f6f-449e-81c7-e1cbb0672667",
+            "containerId": "",
+            "name": "addCourse",
+            "url": "http://localhost:3000/educationalSystem/v1/courses/",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2025-02-16T03:46:25.674Z",
+            "modified": "2025-02-18T01:00:16.534Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2IzZGI3Mjc1ZTU4YzViMzExOWRiMWMiLCJpYXQiOjE3Mzk4NDAzNzgsImV4cCI6MTczOTg0Mzk3OH0.vEtsy6e4EmSHzfoDDhOhT6t8O5PaNzMJZxX-atTsZFo"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"courseName\": \"Practica Supervisada\",\n  \"description\": \"practica class\",\n  \"teacher\": \"67b3db7275e58c5b3119db1c\"\n}\n",
+                "form": []
+            }
+        },
+        {
+            "_id": "1f6c4515-e0b5-4757-8656-ab9e7d102105",
+            "colId": "e17d8b0f-2f6f-449e-81c7-e1cbb0672667",
+            "containerId": "",
+            "name": "getCourses",
+            "url": "http://localhost:3000/educationalSystem/v1/courses/",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2025-02-16T22:51:37.613Z",
+            "modified": "2025-02-16T22:51:43.789Z",
+            "headers": []
+        },
+        {
+            "_id": "b7bdd5a0-ba96-4a60-8466-7b01541d2f98",
+            "colId": "e17d8b0f-2f6f-449e-81c7-e1cbb0672667",
+            "containerId": "",
+            "name": "updateCourse",
+            "url": "http://localhost:3000/educationalSystem/v1/courses/67b288d11c882d4694a0df95",
+            "method": "PUT",
+            "sortNum": 40000,
+            "created": "2025-02-16T23:05:34.833Z",
+            "modified": "2025-02-17T23:10:32.891Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2FmZTExYTFiYzNkZGU3ZmM3N2EwMTciLCJpYXQiOjE3Mzk4MzM3OTIsImV4cCI6MTczOTgzNzM5Mn0.ggwbtr1o4gD4Pkwvj9TTHd77oQYFnto06T8FSVOuqmw"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"courseName\": \"TICS\",\n  \"description\": \"TICS class\",\n  \"assignedStudents\": [\"67aeae6c2c86de251005faed\"],\n  \"teacher\": \"67afe11a1bc3dde7fc77a017\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "9d6e9560-e3c2-456a-8ec0-1933490c7b6d",
+            "colId": "e17d8b0f-2f6f-449e-81c7-e1cbb0672667",
+            "containerId": "",
+            "name": "deleteCourse",
+            "url": "http://localhost:3000/educationalSystem/v1/courses/67aeae3b98acbc438ee579a6",
+            "method": "DELETE",
+            "sortNum": 50000,
+            "created": "2025-02-17T00:08:17.545Z",
+            "modified": "2025-02-18T00:53:11.634Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2FmZTExYTFiYzNkZGU3ZmM3N2EwMTciLCJpYXQiOjE3Mzk4Mzk2ODUsImV4cCI6MTczOTg0MzI4NX0.UZBAa1OSwMVDIOTe73Z-uzUSWGEksro4BskymbYuL5k"
+                }
+            ]
+        },
+        {
+            "_id": "9052cd00-f830-4676-92df-4863bfc30b74",
+            "colId": "e17d8b0f-2f6f-449e-81c7-e1cbb0672667",
+            "containerId": "",
+            "name": "signStudentsInCourses",
+            "url": "http://localhost:3000/educationalSystem/v1/courses/sign",
+            "method": "PUT",
+            "sortNum": 60000,
+            "created": "2025-02-17T23:52:23.402Z",
+            "modified": "2025-02-18T01:23:43.972Z",
+            "headers": [
+                {
+                    "name": "x-token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2IzYmZiNTNmYzllMTYwMmZlMTlmNzciLCJpYXQiOjE3Mzk4NDE4MTEsImV4cCI6MTczOTg0NTQxMX0.wkG5MV2GL2vQcP6j53nYk8jrAkfmbu6G5w3c9DGvDA4"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"asignedCourses\": [\n    \"67b289051c882d4694a0dfa1\",\n    \"67b289051c882d4694a0dfa1\",\n    \"67b289051c882d4694a0dfa1\",\n    \"67b289051c882d4694a0dfa1\"\n    ]\n}",
+                "form": []
+            }
+        }
+    ],
+    "ref": "v--05Cn5Eyldy0oQ7mixobqNxfbBNpgvaolHG4189libnM54C0IY33z3J_ucqGic73Lwu12p_uk_Qgt4zpOVeg"
+}

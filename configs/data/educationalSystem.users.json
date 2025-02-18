@@ -1,0 +1,175 @@
+[{
+  "_id": {
+    "$oid": "67aeae6c2c86de251005faed"
+  },
+  "name": "Luis Mejia",
+  "email": "luis@kinal.edu.gt",
+  "username": "lmejia",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$F44R3OLNpF7UtQt/A6p0kA$RkXSiZx+PLiGsXOPyIjr48jgZIn8eLCwHYbqn2KVEK0",
+  "role": "STUDENT_ROLE",
+  "studentInfo": {
+    "courses": []
+  },
+  "teacherInfo": {
+    "coursesCreated": []
+  },
+  "status": true,
+  "createdAt": {
+    "$date": "2025-02-14T02:46:04.265Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-18T00:50:22.599Z"
+  },
+  "asignedCourses": [
+    {
+      "$oid": "67aeae3b98acbc438ee579a6"
+    },
+    {
+      "$oid": "67aeae5798acbc438ee579a8"
+    },
+    {
+      "$oid": "67b16f9c4938756457230a98"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67aeb0098baecd45d30c7824"
+  },
+  "name": "Pedro Bravo",
+  "email": "pedro@kinal.edu.gt",
+  "username": "pbravo",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$N1mhiUkIkD2jq8YpuwKw9Q$mrNYhxr3R6KS1vYyLEDE94M1hDcc4zeQJyNWjifq8ro",
+  "role": "STUDENT_ROLE",
+  "studentInfo": {
+    "courses": []
+  },
+  "teacherInfo": {
+    "coursesCreated": []
+  },
+  "status": true,
+  "createdAt": {
+    "$date": "2025-02-14T02:52:57.089Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-18T00:24:47.334Z"
+  },
+  "asignedCourses": [
+    {
+      "$oid": "67aeae3b98acbc438ee579a6"
+    },
+    {
+      "$oid": "67aeae5798acbc438ee579a8"
+    },
+    {
+      "$oid": "67b16f9c4938756457230a98"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67afcf7a3af4c917684fc650"
+  },
+  "name": "José Cortez",
+  "email": "jcortex@kinal.edu.gt",
+  "username": "jcortez",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$Q8wCz36asyIskisAiu/nUg$Z3VLylDhL2eVxLTEZwUYfsQ9JMHg8NHHI7g2JRfaDlQ",
+  "role": "TEACHER_ROLE",
+  "studentInfo": {
+    "courses": []
+  },
+  "teacherInfo": {
+    "coursesCreated": []
+  },
+  "status": true,
+  "createdAt": {
+    "$date": "2025-02-14T23:19:22.968Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-14T23:19:22.968Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67afe11a1bc3dde7fc77a017"
+  },
+  "name": "cefe",
+  "email": "cefe@kinal.edu.gt",
+  "username": "cefe",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$P6fmgVs3YM84D93dlvby0w$+b/++1mZgm0crEz6WBQA+pYVvaq0aCkRrVqFXgBZ6FY",
+  "role": "TEACHER_ROLE",
+  "studentInfo": {
+    "courses": []
+  },
+  "teacherInfo": {
+    "coursesCreated": []
+  },
+  "status": true,
+  "createdAt": {
+    "$date": "2025-02-15T00:34:34.404Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-17T01:08:40.149Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67afec191bc3dde7fc77a025"
+  },
+  "name": "Aron",
+  "email": "bravo@kinal.edu.gt",
+  "username": "bravo",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$4p8M7S/Cdw6e6rvpqYn1nA$Czh+b9+GEzNknFNAeb1xs+WI6GV5H6VIZvqx1OCmyjU",
+  "role": "STUDENT_ROLE",
+  "studentInfo": {
+    "courses": []
+  },
+  "teacherInfo": {
+    "coursesCreated": []
+  },
+  "status": false,
+  "createdAt": {
+    "$date": "2025-02-15T01:21:29.335Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-16T02:59:54.992Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67b3bfb53fc9e1602fe19f77"
+  },
+  "name": "Chino",
+  "username": "chino",
+  "email": "chino@kinal.edu.gt",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$GOAV4+DN6CfmQVIKWHPuTw$em7pBr/rmS8oNHfahZnFbCHSMSgdILeXmy6hVsqCIRw",
+  "role": "STUDENT_ROLE",
+  "courses": [],
+  "asignedCourses": [],
+  "status": true,
+  "createdAt": {
+    "$date": "2025-02-17T23:01:09.767Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-17T23:01:09.767Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67b3db7275e58c5b3119db1c"
+  },
+  "name": "Elmer Santos",
+  "username": "goat",
+  "email": "esantos@kinal.edu.gt",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$D7Tld+rkMsrYo4L6Won1jw$fnvR1G2FnuyZuSp+c+SKJYbp/KlLKcsEfRfap5ImGMo",
+  "role": "TEACHER_ROLE",
+  "courses": [],
+  "asignedCourses": [],
+  "status": true,
+  "createdAt": {
+    "$date": "2025-02-18T00:59:30.342Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-18T01:22:03.541Z"
+  }
+}]
