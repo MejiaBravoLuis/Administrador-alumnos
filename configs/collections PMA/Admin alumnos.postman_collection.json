@@ -1,0 +1,327 @@
+{
+	"info": {
+		"_postman_id": "c96e2dd7-476d-4a09-94e2-491740be65a1",
+		"name": "Admin alumnos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37533644"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Registrar alumno",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Pedro Bravo\",\r\n    \"email\": \"pbravo@gmail.com\",\r\n    \"username\": \"pbravo\",\r\n    \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/educationalSystem/v1/auth/register/student",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"educationalSystem",
+								"v1",
+								"auth",
+								"register",
+								"student"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login alumno",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"lmejiaa\",\r\n    \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/educationalSystem/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"educationalSystem",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registrar maestro",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Elmer Santos\",\r\n    \"email\": \"esantos@gmail.com\",\r\n    \"username\": \"esantos\",\r\n    \"password\": \"12345678\",\r\n    \"role\": \"TEACHER_ROLE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/educationalSystem/v1/auth/register/teacher",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"educationalSystem",
+								"v1",
+								"auth",
+								"register",
+								"teacher"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login maestro",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"esantos\",\r\n    \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/educationalSystem/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"educationalSystem",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Courses",
+			"item": [
+				{
+					"name": "Agregar curso",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2M4ZWU0ZGE3NzhhZjdkNWIyOTcyZDQiLCJpYXQiOjE3NDEyMjQ0MjQsImV4cCI6MTc0MTIyODAyNH0.1PesHPmzm-ao8nOzHcimIlbk8GZJmZvDeMsPp2PExzE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"courseName\": \"TICS\",\r\n    \"description\": \"Clase de TICS\",\r\n    \"teacher\": \"67c8ee4da778af7d5b2972d4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/educationalSystem/v1/courses/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"educationalSystem",
+								"v1",
+								"courses",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Asignar un alumno a cursos",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2M4ZmM1Yzk5ZWRlZjE3Y2VhYzdmMDAiLCJpYXQiOjE3NDEyMjUwNTgsImV4cCI6MTc0MTIyODY1OH0.BFZP1taVj7yyrlLfZfZqLvezseAJ1374s-GZ2GyUg88",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"asignedCourses\": [\"67c8fa6d07df5f24a859d135\", \"67c8fa0207df5f24a859d126\", \"67c8fa4b07df5f24a859d12b\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/educationalSystem/v1/courses/sign",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"educationalSystem",
+								"v1",
+								"courses",
+								"sign"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cursos a los que pertenezco",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2M4ZmM1Yzk5ZWRlZjE3Y2VhYzdmMDAiLCJpYXQiOjE3NDEyMjUwNTgsImV4cCI6MTc0MTIyODY1OH0.BFZP1taVj7yyrlLfZfZqLvezseAJ1374s-GZ2GyUg88",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/educationalSystem/v1/courses/myCourses",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"educationalSystem",
+								"v1",
+								"courses",
+								"myCourses"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Editar usuario",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2M4ZTU1NzVlNmEzZDgyMDBlNTI0ZWEiLCJpYXQiOjE3NDEyMjY1NzUsImV4cCI6MTc0MTIzMDE3NX0.DYL6Po0wvJblatlDSwzh8t0XX-t35X8yHU4RGnrOcJw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Luis Mejia\",\r\n    \"username\": \"lmejiaa\"\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/educationalSystem/v1/users/67c8e5575e6a3d8200e524ea",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"educationalSystem",
+								"v1",
+								"users",
+								"67c8e5575e6a3d8200e524ea"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar usuarios",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2M4ZTU1NzVlNmEzZDgyMDBlNTI0ZWEiLCJpYXQiOjE3NDEyMjcyNDcsImV4cCI6MTc0MTIzMDg0N30.Wj4tHc8ut-8SuxUx8mdodq0YW304KECCsdShGk-m5iY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/educationalSystem/v1/users/67c8e5575e6a3d8200e524ea",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"educationalSystem",
+								"v1",
+								"users",
+								"67c8e5575e6a3d8200e524ea"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

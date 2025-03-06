@@ -1,6 +1,7 @@
 import { response, request } from "express";
 import { hash } from "argon2";
 import User from "../users/user.model.js"
+import Course from "../courses/course.model.js"
 
 export const getUsers = async (req = request, res = response) => {
     try {
@@ -32,30 +33,39 @@ export const getUsers = async (req = request, res = response) => {
 
 export const updateUser = async (req, res = response) => {
     try {
-        
         const { id } = req.params;
-        const { _id, password, email, ...data} = req.body;
+        const authenticatedUserId = req.user._id; 
 
-        if (password) {
-            data.password = await hash(password)
+        if (id !== authenticatedUserId.toString()) {
+            return res.status(403).json({
+                success: false,
+                msg: "You can only update your own account"
+            });
         }
 
-        const user = await User.findByIdAndUpdate(id, data, {new: true});
+        const { _id, password, email, ...data } = req.body;
+
+        if (password) {
+            data.password = await hash(password);
+        }
+
+        const user = await User.findByIdAndUpdate(id, data, { new: true });
 
         res.status(200).json({
-            succes: true,
-            msg: 'User updated succesfully!!',
+            success: true,
+            msg: "User updated successfully!",
             user
-        })
+        });
 
     } catch (error) {
         res.status(500).json({
-            succes: false,
-            msg: 'Ups, something went wrong trying to update this user',
-            error
-        })
+            success: false,
+            msg: "Ups, something went wrong trying to update this user",
+            error: error.message
+        });
     }
-}
+};
+
 
 export const updatePassword = async (req = request, res = response) => {
     try {
@@ -97,25 +107,47 @@ export const updatePassword = async (req = request, res = response) => {
 
 export const deleteUser = async (req, res) => {
     try {
-        
         const { id } = req.params;
+        const authenticatedUserId = req.user._id;
 
-        const user = await User.findByIdAndUpdate(id, {status: false}, {new: true});
+        if (id !== authenticatedUserId.toString()) {
+            return res.status(403).json({
+                success: false,
+                msg: "You can only deactivate your own account"
+            });
+        }
 
-        const authenticatedUser = req.user;
+        const user = await User.findById(id);
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                msg: "User not found"
+            });
+        }
+
+        const courses = await Course.find({ students: id });
+
+        await Promise.all(
+            courses.map(course =>
+                Course.findByIdAndUpdate(course._id, { $pull: { students: id } })
+            )
+        );
+
+        user.status = false;
+        user.asignedCourses = [];
+        await user.save({ validateBeforeSave: false });
 
         res.status(200).json({
-            succes: true,
-            msg: 'User deleted succesfully!!',
-            user,
-            authenticatedUser
-        })
+            success: true,
+            msg: "User account deactivated and removed from courses successfully!",
+            user
+        });
 
     } catch (error) {
         res.status(500).json({
-            succes: false,
-            msg: 'Ups, something went wrong trying to delete the user',
-            error
-        })
+            success: false,
+            msg: "Ups, something went wrong trying to deactivate the user",
+            error: error.message
+        });
     }
-}
+};

@@ -1,11 +1,11 @@
 import { Router } from "express";
 import { check, body } from "express-validator";
-import { getCourses, updateCourse, addCourse, deleteCourse, signStudents } from "../courses/course.controller.js";
+import { getCourses, updateCourse, addCourse, deleteCourse, signStudents, getStudentCourses } from "../courses/course.controller.js";
 import { validarCampos } from "../middlewares/validar-campos.js";
 import { existeCourseById } from "../helpers/db-validator.js";
 import { tieneRole } from "../middlewares/validar-roles.js";
 import { validarJWT } from "../middlewares/validar-jwt.js";
-import { alreadySigned, duplicatedCourse } from "../middlewares/validator.js"
+import { alreadySigned } from "../middlewares/validator.js"
 
 const router = Router();
 
@@ -28,18 +28,17 @@ router.put(
         tieneRole("STUDENT_ROLE"),
         body("asignedCourses")
             .isArray().withMessage("Course's must be in array: []")
-            .custom((courses) =>{
+            .custom((courses) => {
                 if (courses.length > 3) {
-                    throw new Error("The student only can be signed in 3 courses max")
+                    throw new Error("The student can only be signed in 3 courses max");
                 }
                 return true;
-            })
-            .custom(duplicatedCourse),
+            }),
         check("asignedCourses.*").custom(alreadySigned),
         validarCampos
     ],
     signStudents
-)
+);
 
 router.put(
     "/:id",
@@ -62,6 +61,16 @@ router.delete(
         validarCampos
     ],
     deleteCourse
+);
+
+router.get(
+    "/myCourses",
+    [
+        validarJWT,
+        tieneRole("STUDENT_ROLE"),
+        validarCampos
+    ],
+    getStudentCourses
 );
 
 export default router;

@@ -48,7 +48,6 @@ export const addCourse = async (req = request, res = response) => {
     }
 };
 
-
 export const getCourses = async (req = request, res = response) => {
     try {
         const courses = await Course.find().populate("teacher", "name email");
@@ -156,62 +155,79 @@ export const deleteCourse = async (req, res) => {
 
 export const signStudents = async (req, res) => {
     try {
-        
         const { asignedCourses } = req.body;
         const authenticatedUser = req.user;
 
-        if (authenticatedUser.role !== "STUDENT_ROLE") {
-            return res.status(404).json({
-                success: false,
-                message: "Only students can sign in courses"
-            });
-        }
-
-        if (!Array.isArray(asignedCourses) || asignedCourses.length === 0) {
-            return res.status(400).json({
-                succes: false,
-                message: "Course's ID must be in array"
-            });
-        }
-
         const user = await User.findById(authenticatedUser._id);
-        if (!user) {
+
+        const newCourses = await Course.find({
+            _id: { $in: asignedCourses },
+            status: true, 
+            students: { $nin: [authenticatedUser._id] } 
+        });
+
+        if (newCourses.length === 0) {
             return res.status(400).json({
                 success: false,
-                message: "The student can be signed in 3 courses max"
+                message: "You are already signed in to these courses or they are inactive."
             });
         }
 
-        const updatedCourses = await Promise.all(
-            asignedCourses.map(async (courseId) => {
-                const course = await Course.findById(courseId);
+        if (user.asignedCourses.length + newCourses.length > 3) {
+            return res.status(400).json({
+                success: false,
+                message: `Students can only be enrolled in up to 3 courses. You currently have ${user.asignedCourses.length} enrolled.`
+            });
+        }
 
-                if (!course.students.includes(authenticatedUser._id)) {
-                    return Course.findByIdAndUpdate(
-                        courseId,
-                        { students: [...course.students, authenticatedUser._id] },
-                        { new: true }
-                    );
-                }
-                return course;
-            })
+        await Promise.all(
+            newCourses.map(course =>
+                Course.findByIdAndUpdate(course._id, { $push: { students: authenticatedUser._id } })
+            )
         );
 
         await User.findByIdAndUpdate(authenticatedUser._id, {
-            asignedCourses: [ ...user.asignedCourses, ...asignedCourses ]
+            $push: { asignedCourses: { $each: newCourses.map(course => course._id) } }
         });
 
-        return res.status(200).json({
+        res.status(200).json({
             success: true,
-            msg: "You've signed in the selected courses",
-            courses: updatedCourses.filter(course => course !== null)
+            message: "You've signed in to the selected courses successfully!",
+            courses: newCourses
         });
 
     } catch (error) {
-        return res.status(500).json({
-            success: true,
-            message: "Ups, something went wrong trying to sign in the courses",
-            error
-        })
+        res.status(500).json({
+            success: false,
+            message: "Something went wrong while signing in to courses",
+            error: error.message
+        });
     }
-}
+};
+
+export const getStudentCourses = async (req, res) => {
+    try {
+        const authenticatedUser = req.user;
+
+        const student = await User.findById(authenticatedUser._id)
+            .populate({
+                path: "asignedCourses",
+                match: { status: true },
+                select: "courseName description teacher"
+            });
+
+        res.status(200).json({
+            success: true,
+            msg: `${authenticatedUser.username} You're signed in the courses:`,
+            total: student.asignedCourses.length,
+            courses: student.asignedCourses
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Something went wrong while getting your courses",
+            error: error.message
+        });
+    }
+};

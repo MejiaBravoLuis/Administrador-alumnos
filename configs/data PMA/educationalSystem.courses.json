@@ -1,0 +1,84 @@
+[{
+  "_id": {
+    "$oid": "67c8fa0207df5f24a859d126"
+  },
+  "courseName": "Taller",
+  "description": "Clase de taller",
+  "status": true,
+  "teacher": {
+    "$oid": "67c8ee4da778af7d5b2972d4"
+  },
+  "students": [
+    {
+      "$oid": "67c8fc5c99edef17ceac7f00"
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-03-06T01:27:30.458Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-06T02:11:40.189Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67c8fa4b07df5f24a859d12b"
+  },
+  "courseName": "Tecnología",
+  "description": "Clase de tecnología",
+  "status": true,
+  "teacher": {
+    "$oid": "67c8ee4da778af7d5b2972d4"
+  },
+  "students": [
+    {
+      "$oid": "67c8fc5c99edef17ceac7f00"
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-03-06T01:28:43.256Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-06T02:11:40.190Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67c8fa5c07df5f24a859d130"
+  },
+  "courseName": "Practica Supervisada",
+  "description": "Clase de pracitca supervisada",
+  "status": true,
+  "teacher": {
+    "$oid": "67c8ee4da778af7d5b2972d4"
+  },
+  "students": [],
+  "createdAt": {
+    "$date": "2025-03-06T01:29:00.915Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-06T02:11:40.190Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67c8fa6d07df5f24a859d135"
+  },
+  "courseName": "TICS",
+  "description": "Clase de TICS",
+  "status": true,
+  "teacher": {
+    "$oid": "67c8ee4da778af7d5b2972d4"
+  },
+  "students": [
+    {
+      "$oid": "67c8fc5c99edef17ceac7f00"
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-03-06T01:29:17.189Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-06T01:38:28.024Z"
+  }
+}]

@@ -1,0 +1,67 @@
+[{
+  "_id": {
+    "$oid": "67c8e5575e6a3d8200e524ea"
+  },
+  "name": "Luis Mejia",
+  "username": "lmejiaa",
+  "email": "lmejia@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$T73vEsd+aPh0F/TZqLUCaw$hpx0TVzjqqmLbU1GJ8oSTs0dCaG4Q03qsm5nik3zmWE",
+  "role": "STUDENT_ROLE",
+  "courses": [],
+  "asignedCourses": [],
+  "status": false,
+  "createdAt": {
+    "$date": "2025-03-05T23:59:19.613Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-06T02:14:17.016Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67c8ee4da778af7d5b2972d4"
+  },
+  "name": "Elmer Santos",
+  "username": "esantos",
+  "email": "esantos@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$ayP2DKKmkpMV7Sgirx6CqA$I5w39trtajqgzjyVw7O5R2OUtua0jVqTJmZGagwXGYY",
+  "role": "TEACHER_ROLE",
+  "courses": [],
+  "asignedCourses": [],
+  "status": true,
+  "createdAt": {
+    "$date": "2025-03-06T00:37:33.165Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-06T00:37:33.165Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67c8fc5c99edef17ceac7f00"
+  },
+  "name": "Pedro Bravo",
+  "username": "pbravo",
+  "email": "pbravo@gmail.com",
+  "password": "$argon2id$v=19$m=65536,t=3,p=4$9DfNtymh0rCTEnUMe4O2ZQ$lUd60kb/82go+pcmRFo4uh1S/vSjSkMU5+IiRb/H/fw",
+  "role": "STUDENT_ROLE",
+  "courses": [],
+  "asignedCourses": [
+    {
+      "$oid": "67c8fa0207df5f24a859d126"
+    },
+    {
+      "$oid": "67c8fa4b07df5f24a859d12b"
+    },
+    {
+      "$oid": "67c8fa6d07df5f24a859d135"
+    }
+  ],
+  "status": true,
+  "createdAt": {
+    "$date": "2025-03-06T01:37:32.331Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-06T01:55:59.057Z"
+  }
+}]

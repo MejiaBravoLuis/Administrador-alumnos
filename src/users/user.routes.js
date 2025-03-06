@@ -15,6 +15,7 @@ router.get("/", getUsers)
 router.put(
     "/:id",
     [
+        validarJWT,
         check("id", "This ID is not vaild").isMongoId(),
         check("id").custom(existeUsuarioById),
         validarCampos
@@ -38,7 +39,7 @@ router.delete(
     "/:id",
     [
         validarJWT,
-        tieneRole("ADMIN_ROLE", "VENTAS_ROLE"),
+        tieneRole("STUDENT_ROLE"),
         check("id", "Seems like this ID is not valid").isMongoId(),
         check("id").custom(existeUsuarioById),
         validarCampos
